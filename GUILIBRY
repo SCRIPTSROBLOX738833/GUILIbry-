@@ -1,0 +1,56 @@
+-- اسم المكتبة: GuiLibrary
+local GuiLibrary = {}
+
+-- دالة لإنشاء زر مع اسم محدد، وحجم، وموقع، وحدوث عند الضغط
+function GuiLibrary.createButton(parent, buttonText, size, position, buttonEvent)
+    local button = Instance.new("TextButton")
+    button.Parent = parent
+    button.Text = buttonText  -- هنا المستخدم هيحدد اسم الزر
+    button.Size = size
+    button.Position = position
+    button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    
+    -- عند الضغط على الزر، يتم تشغيل الحدث المحدد من المستخدم
+    button.MouseButton1Click:Connect(function()
+        if buttonEvent then
+            buttonEvent()
+        end
+    end)
+
+    return button
+end
+
+-- دالة لإنشاء توجل مع اسم محدد، وحجم، وموقع، وحدوث عند التبديل بين الحالتين
+function GuiLibrary.createToggle(parent, toggleText, size, position, toggleEvent)
+    local toggle = Instance.new("TextButton")
+    toggle.Parent = parent
+    toggle.Size = size
+    toggle.Position = position
+    toggle.Text = toggleText  -- هنا المستخدم هيحدد اسم التوجيل
+    toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    
+    local isToggled = false
+    
+    -- عند الضغط على التوجيل، يتم تبديل الحالة وتشغيل الحدث المحدد من المستخدم
+    toggle.MouseButton1Click:Connect(function()
+        isToggled = not isToggled
+        toggle.Text = isToggled and "تم التفعيل" or toggleText  -- تغيير النص بين التفعيل والتوقف
+        if toggleEvent then
+            toggleEvent(isToggled)
+        end
+    end)
+
+    return toggle
+end
+
+-- دالة لإنشاء صورة مع رقم الصورة المحدد وحجم، وموقع
+function GuiLibrary.createImage(parent, imageId, size, position)
+    local image = Instance.new("ImageLabel")
+    image.Parent = parent
+    image.Image = "rbxassetid://" .. imageId  -- هنا المستخدم هيحدد رقم الصورة
+    image.Size = size
+    image.Position = position
+    return image
+end
+
+return GuiLibrary
