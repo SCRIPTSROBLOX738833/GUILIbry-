@@ -1,7 +1,7 @@
 -- اسم المكتبة: GuiLibrary
 local GuiLibrary = {}
 
--- دالة لإنشاء زر مع اسم محدد، وحجم، وموقع، وحدوث عند الضغط
+-- الضغط
 function GuiLibrary.createButton(parent, buttonText, size, position, buttonEvent)
     local button = Instance.new("TextButton")
     button.Parent = parent
@@ -10,7 +10,7 @@ function GuiLibrary.createButton(parent, buttonText, size, position, buttonEvent
     button.Position = position
     button.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
     
-    -- عند الضغط على الزر، يتم تشغيل الحدث المحدد من المستخدم
+    -- عند  تشغيل 
     button.MouseButton1Click:Connect(function()
         if buttonEvent then
             buttonEvent()
